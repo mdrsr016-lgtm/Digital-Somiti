@@ -1,0 +1,18 @@
+.card {
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.hover {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(var(--primary-h), var(--primary-s), var(--primary-l), 0.3);
+}

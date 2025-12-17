@@ -1,16 +1,11 @@
 import styles from "./page.module.css";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.logo}>NGO Cloud</div>
-        <nav className={styles.nav}>
-          <a href="#">Features</a>
-          <a href="#">Pricing</a>
-          <a href="#" className={styles.loginBtn}>Login</a>
-        </nav>
-      </header>
+      <Navbar />
       
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -24,6 +19,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

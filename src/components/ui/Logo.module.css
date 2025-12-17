@@ -1,0 +1,46 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.9;
+}
+
+.icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.square {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--text-main);
+  border-radius: 4px;
+  bottom: 0;
+  right: 0;
+  opacity: 0.3;
+}
