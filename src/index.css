@@ -1,18 +1,20 @@
-/* Digital Somiti - Reset to fresh state */
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-
 :root {
-  /* Brand Primary Colors (Extracted from Brand Asset) */
+  /* Brand Primary Colors */
   --color-rich-black: #00072d;
   --color-dark-green: #051650;
   --color-bangladesh-green: #0a2472;
   --color-caribbean-green: #123499;
-  --color-primary-green: #5eaf73; /* Mapped from 'White' label with green hex in mockup */
+  --color-primary-green: #5eaf73;
 
   /* Secondary Colors */
   --color-secondary-blue-1: #1e4bb5;
   --color-secondary-blue-2: #143edb;
   --color-secondary-deep-blue: #080da1;
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 15px;
 
   font-family: 'Questrial', 'AvantGarde', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
@@ -21,11 +23,15 @@
   color-scheme: dark;
   background-color: var(--color-rich-black);
   color: white;
+
+  /* Responsive Spacing */
+  --spacing-container: clamp(1rem, 5vw, 3rem);
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .hero-background {
@@ -34,7 +40,7 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/bg.jpg');
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -47,5 +53,173 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: var(--spacing-container);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Glass Card */
+.login-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-logo-container {
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 0.5rem;
+}
+
+.login-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.login-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  opacity: 0.7;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 280px;
+}
+
+/* Form Styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  opacity: 0.5;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.login-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.login-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-primary-green);
+}
+
+.forgot-password {
+  align-self: flex-end;
+  font-size: 0.85rem;
+  color: white;
+  opacity: 0.7;
+  text-decoration: none;
+  margin-top: -0.5rem;
+}
+
+.submit-button {
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0.3;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: white;
+}
+
+/* Social Buttons */
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex: 1;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
 }
