@@ -1,11 +1,25 @@
 /* Digital Somiti - Reset to fresh state */
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
 :root {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Brand Primary Colors (Extracted from Brand Asset) */
+  --color-rich-black: #00072d;
+  --color-dark-green: #051650;
+  --color-bangladesh-green: #0a2472;
+  --color-caribbean-green: #123499;
+  --color-primary-green: #5eaf73; /* Mapped from 'White' label with green hex in mockup */
+
+  /* Secondary Colors */
+  --color-secondary-blue-1: #1e4bb5;
+  --color-secondary-blue-2: #143edb;
+  --color-secondary-deep-blue: #080da1;
+
+  font-family: 'Questrial', 'AvantGarde', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: dark;
-  background-color: #000;
+  background-color: var(--color-rich-black);
   color: white;
 }
 
