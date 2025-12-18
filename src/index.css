@@ -223,3 +223,82 @@ body {
   width: 20px;
   height: 20px;
 }
+
+/* Ultra-Mobile & Short Screen Optimizations (iPhone 4/5) */
+@media screen and (max-width: 350px), screen and (max-height: 550px) {
+  :root {
+    --spacing-container: 0.75rem;
+  }
+
+  .login-card {
+    padding: 1.25rem 1rem;
+    gap: 0.75rem;
+    border-radius: 16px;
+  }
+
+  .login-header {
+    gap: 0.4rem;
+  }
+
+  .login-logo-container {
+    padding: 6px;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
+  }
+
+  .login-logo-container img {
+    width: 32px !important;
+  }
+
+  .login-subtitle {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .login-form {
+    gap: 0.6rem;
+  }
+
+  .login-input {
+    padding: 0.6rem 0.8rem 0.6rem 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .input-icon {
+    left: 0.75rem;
+    width: 18px;
+    height: 18px;
+  }
+
+  .submit-button {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .divider {
+    margin: 0.25rem 0;
+    font-size: 0.75rem;
+  }
+
+  .social-btn {
+    padding: 0.5rem 1rem;
+  }
+
+  .social-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Handle landscape on very short screens */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .content-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    justify-content: flex-start;
+  }
+  
+  .login-card {
+    margin: auto;
+  }
+}

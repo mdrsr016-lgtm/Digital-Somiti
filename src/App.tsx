@@ -1,4 +1,4 @@
-import { Mail, Lock, Eye, EyeOff, LogIn, Github, Chrome, Apple } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Chrome, Apple } from 'lucide-react';
 import { useState } from 'react';
 import logo from './assets/logo.svg';
 
