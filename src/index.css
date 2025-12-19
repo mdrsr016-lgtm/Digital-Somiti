@@ -42,35 +42,59 @@
 }
 
 .light-mode .login-card {
-  background: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .light-mode .brand-name,
 .light-mode .login-title {
-  color: #1a1a1a;
+  color: #0a0a0a;
 }
 
 .light-mode .login-subtitle {
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.light-mode .input-icon {
+  color: var(--color-blue-primary);
+  opacity: 0.8;
+}
+
+.light-mode .password-toggle {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.light-mode .password-toggle:hover {
+  color: var(--color-blue-primary);
+  opacity: 1;
 }
 
 .light-mode .login-input {
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   color: #1a1a1a;
 }
 
 .light-mode .login-input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.35);
 }
 
 .light-mode .login-input:focus {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.85);
   border-color: var(--color-blue-primary);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.light-mode .submit-button {
+  background: var(--color-blue-primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
+}
+
+.light-mode .submit-button:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
 }
 
 .light-mode .forgot-password {
@@ -78,20 +102,22 @@
 }
 
 .light-mode .modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .light-mode .modal-content {
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .light-mode .modal-title {
-  color: #1a1a1a;
+  color: #0a0a0a;
 }
 
 .light-mode .modal-message {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 /* Theme Toggle Button */
@@ -273,11 +299,16 @@ body {
 
 .password-toggle {
   position: absolute;
-  right: 1.25rem;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0.5;
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .password-toggle:hover {
