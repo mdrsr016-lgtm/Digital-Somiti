@@ -37,8 +37,10 @@ function App() {
 
   return (
     <div className={`landing-page ${theme}-mode lang-${language}`}>
-      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-      <LanguageSelector language={language} setLanguage={setLanguage} />
+      <div className="header-controls">
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        <LanguageSelector language={language} setLanguage={setLanguage} />
+      </div>
 
       <div className="content-wrapper">
         <div className="login-card">
