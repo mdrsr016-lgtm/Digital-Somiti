@@ -1,13 +1,13 @@
-import { User, Lock, Eye, EyeOff, Chrome, Apple } from "lucide-react";
+import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import logo from "./assets/logo.svg";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="landing-page">
-      <div className="hero-background" />
       <div className="content-wrapper">
         <div className="login-card">
           <header className="login-header">
@@ -53,7 +53,14 @@ function App() {
               </div>
             </div>
 
-            <a href="#" className="forgot-password">
+            <a
+              href="#"
+              className="forgot-password"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true);
+              }}
+            >
               Forgot password?
             </a>
 
@@ -61,34 +68,25 @@ function App() {
               Get Started
             </button>
           </form>
+        </div>
+      </div>
 
-          <div className="divider">Or sign in with</div>
-
-          <div className="social-buttons">
-            <button className="social-btn" title="Google">
-              <Chrome className="social-icon" />
-            </button>
-            <button className="social-btn" title="Facebook">
-              <svg
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                stroke="currentColor"
-                strokeWidth="2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="social-icon"
-              >
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </button>
-            <button className="social-btn" title="Apple">
-              <Apple className="social-icon" />
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">Reset Password</h3>
+            <p className="modal-message">
+              Please contact the admin to reset your password.
+            </p>
+            <button
+              className="modal-button"
+              onClick={() => setShowModal(false)}
+            >
+              Got it
             </button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
