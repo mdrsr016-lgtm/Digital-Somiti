@@ -33,19 +33,23 @@
 .dark-mode {
   background-color: var(--color-bg-dark);
   color: white;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Light Mode */
 .light-mode {
   background-color: var(--color-bg-light);
   color: #1a1a1a;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .light-mode .login-card {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 .light-mode .brand-name,
@@ -54,7 +58,7 @@
 }
 
 .light-mode .login-subtitle {
-  color: rgba(0, 0, 0, 0.55);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .light-mode .input-icon {
@@ -72,19 +76,19 @@
 }
 
 .light-mode .login-input {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #0a0a0a;
 }
 
 .light-mode .login-input::placeholder {
-  color: rgba(0, 0, 0, 0.35);
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .light-mode .login-input:focus {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   border-color: var(--color-blue-primary);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
 .light-mode .submit-button {
@@ -161,6 +165,55 @@
   background: rgba(0, 0, 0, 0.12);
 }
 
+/* Language Toggle Button */
+.language-toggle {
+  position: fixed;
+  top: 6rem;
+  left: 2rem;
+  min-width: 48px;
+  height: 48px;
+  padding: 0 0.75rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.language-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.language-toggle:active {
+  transform: scale(0.95);
+}
+
+.language-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.light-mode .language-toggle {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.light-mode .language-toggle:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
@@ -220,6 +273,7 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 @font-face {
@@ -258,6 +312,7 @@ body {
   letter-spacing: 0.02em;
   margin: 0;
   line-height: 1;
+  transition: color 0.4s ease;
 }
 
 .login-title {
@@ -266,6 +321,7 @@ body {
   margin: 0.25rem 0 0 0;
   color: #ffffff;
   letter-spacing: -0.01em;
+  transition: color 0.4s ease;
 }
 
 .login-subtitle {
@@ -274,6 +330,7 @@ body {
   line-height: 1.5;
   margin: -0.5rem 0 0.5rem 0;
   max-width: 320px;
+  transition: color 0.4s ease;
 }
 
 /* Form Styles */
@@ -325,7 +382,8 @@ body {
   color: white;
   font-family: inherit;
   font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease,
+    border-color 0.4s ease, color 0.4s ease;
 }
 
 .login-input::placeholder {
@@ -646,5 +704,18 @@ body {
     height: 44px;
     top: 1.5rem;
     left: 1.5rem;
+  }
+
+  /* Make language toggle smaller on mobile */
+  .language-toggle {
+    top: 5rem;
+    left: 1.5rem;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 0.6rem;
+  }
+
+  .language-text {
+    font-size: 0.75rem;
   }
 }

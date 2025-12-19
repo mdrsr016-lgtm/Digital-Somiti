@@ -1,4 +1,4 @@
-import { User, Lock, Eye, EyeOff, Sun, Moon } from "lucide-react";
+import { User, Lock, Eye, EyeOff, Sun, Moon, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "./assets/logo.svg";
 
@@ -6,6 +6,7 @@ function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [language, setLanguage] = useState<"en" | "bn">("en");
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -15,13 +16,33 @@ function App() {
     }
   }, []);
 
+  // Load language from localStorage on mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language") as
+      | "en"
+      | "bn"
+      | null;
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
   // Save theme to localStorage when it changes
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // Save language to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "en" ? "bn" : "en"));
   };
 
   return (
@@ -33,6 +54,18 @@ function App() {
         aria-label="Toggle theme"
       >
         {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+      </button>
+
+      {/* Language Toggle Button */}
+      <button
+        className="language-toggle"
+        onClick={toggleLanguage}
+        aria-label="Toggle language"
+      >
+        <Globe size={18} />
+        <span className="language-text">
+          {language === "en" ? "EN" : "বাং"}
+        </span>
       </button>
 
       <div className="content-wrapper">
