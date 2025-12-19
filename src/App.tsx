@@ -78,7 +78,7 @@ function App() {
         // If the "User ID" is "mem123", we can't easily sign in without a custom mapping.
 
         // FOR NOW: Let's assume the user enters EMAIL to login, OR we implement a "fake" email generator "mem123@digitalsomiti.local".
-        emailToLogin = `${userId}@digitalsomiti.com`; // Mock domain for custom IDs
+        emailToLogin = `${userId}@dsbd.com`; // Mock domain for custom IDs
       }
 
       const { data: authData, error: authError } =
