@@ -1,13 +1,40 @@
-import { User, Lock, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { User, Lock, Eye, EyeOff, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 import logo from "./assets/logo.svg";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+
+  // Load theme from localStorage on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  // Save theme to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   return (
-    <div className="landing-page">
+    <div className={`landing-page ${theme}-mode`}>
+      {/* Theme Toggle Button */}
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+      </button>
+
       <div className="content-wrapper">
         <div className="login-card">
           <header className="login-header">

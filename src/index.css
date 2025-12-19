@@ -1,6 +1,7 @@
 :root {
-  /* New Blue Theme Palette */
-  --color-bg-dark: #00072d;
+  /* Dark Mode Colors */
+  --color-bg-dark: #010b13;
+  --color-bg-light: #fafafa;
   --color-blue-deep: #051650;
   --color-blue-navy: #0a2472;
   --color-blue-royal: #123499;
@@ -28,10 +29,117 @@
   --spacing-container: clamp(1rem, 5vw, 3rem);
 }
 
+/* Dark Mode (default) */
+.dark-mode {
+  background-color: var(--color-bg-dark);
+  color: white;
+}
+
+/* Light Mode */
+.light-mode {
+  background-color: var(--color-bg-light);
+  color: #1a1a1a;
+}
+
+.light-mode .login-card {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.light-mode .brand-name,
+.light-mode .login-title {
+  color: #1a1a1a;
+}
+
+.light-mode .login-subtitle {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.light-mode .login-input {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #1a1a1a;
+}
+
+.light-mode .login-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.light-mode .login-input:focus {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.light-mode .forgot-password {
+  color: var(--color-secondary-deep-blue);
+}
+
+.light-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.light-mode .modal-content {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.light-mode .modal-title {
+  color: #1a1a1a;
+}
+
+.light-mode .modal-message {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.light-mode .theme-toggle {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.light-mode .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
   min-height: 100vh;
+  transition: background-color 0.3s ease;
 }
 
 .hero-background {
@@ -499,5 +607,13 @@ body {
   .modal-button {
     padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
+  }
+
+  /* Make theme toggle smaller on mobile */
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    top: 1.5rem;
+    left: 1.5rem;
   }
 }
