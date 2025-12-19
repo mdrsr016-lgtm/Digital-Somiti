@@ -1,10 +1,10 @@
 :root {
-  /* Brand Primary Colors */
-  --color-rich-black: #00072d;
-  --color-dark-green: #051650;
-  --color-bangladesh-green: #0a2472;
-  --color-caribbean-green: #123499;
-  --color-primary-green: #5eaf73;
+  /* New Blue Theme Palette */
+  --color-bg-dark: #00072d;
+  --color-blue-deep: #051650;
+  --color-blue-navy: #0a2472;
+  --color-blue-royal: #123499;
+  --color-blue-primary: #3b82f6;
 
   /* Secondary Colors */
   --color-secondary-blue-1: #1e4bb5;
@@ -16,12 +16,12 @@
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-blur: 15px;
 
-  font-family: 'Questrial', 'AvantGarde', system-ui, -apple-system, sans-serif;
+  font-family: "Questrial", "AvantGarde", system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: dark;
-  background-color: var(--color-rich-black);
+  background-color: var(--color-bg-dark);
   color: white;
 
   /* Responsive Spacing */
@@ -40,7 +40,8 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -59,59 +60,93 @@ body {
 }
 
 /* Glass Card */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .login-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: clamp(1.5rem, 5vw, 2.5rem);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
   width: 100%;
-  max-width: 440px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  max-width: 360px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@font-face {
+  font-family: "Caviler";
+  src: url("../caviler.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .login-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.25rem;
 }
 
-.login-logo-container {
-  background: white;
-  padding: 10px;
-  border-radius: 12px;
+.brand-identity {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 0.5rem;
+  gap: 0.75rem;
+  color: var(--color-blue-primary);
+  transition: transform 0.3s ease;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-family: "Caviler", sans-serif;
+  font-size: 2.75rem;
+  font-weight: normal;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1;
 }
 
 .login-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 0;
-  color: white;
+  margin: 0.25rem 0 0 0;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .login-subtitle {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  opacity: 0.7;
-  line-height: 1.4;
-  margin: 0;
-  max-width: 280px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+  margin: -0.5rem 0 0.5rem 0;
+  max-width: 320px;
 }
 
 /* Form Styles */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .input-group {
@@ -122,68 +157,100 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 1rem;
-  opacity: 0.5;
+  left: 1.25rem;
+  color: var(--color-blue-primary);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
 .password-toggle {
   position: absolute;
-  right: 1rem;
+  right: 1.25rem;
   opacity: 0.5;
   cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px;
+}
+
+.password-toggle:hover {
+  opacity: 1;
+  color: var(--color-blue-primary);
 }
 
 .login-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 0.8rem 1rem 0.8rem 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem 1rem 1rem 3.5rem;
   color: white;
   font-family: inherit;
   font-size: 1rem;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
 }
 
 .login-input:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-primary-green);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.login-input:focus + .input-icon {
+  opacity: 1;
 }
 
 .forgot-password {
   align-self: flex-end;
-  font-size: 0.85rem;
-  color: white;
-  opacity: 0.7;
+  font-size: 0.875rem;
+  color: var(--color-blue-primary);
   text-decoration: none;
   margin-top: -0.5rem;
+  font-weight: 500;
+  transition: filter 0.2s;
+}
+
+.forgot-password:hover {
+  filter: brightness(1.2);
 }
 
 .submit-button {
-  background: #1a1a1a;
+  background: var(--color-blue-primary);
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 1rem;
-  font-size: 1rem;
+  border-radius: 16px;
+  padding: 1.1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 0.5rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .submit-button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  filter: brightness(1.1);
+}
+
+.submit-button:active {
+  transform: translateY(0);
 }
 
 /* Divider */
 .divider {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  opacity: 0.3;
-  font-size: 0.8rem;
+  gap: 1.25rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.875rem;
+  font-weight: 500;
   margin: 0.5rem 0;
 }
 
@@ -192,113 +259,146 @@ body {
   content: "";
   flex: 1;
   height: 1px;
-  background: white;
+  background: linear-gradient(
+    to var(--direction, right),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+.divider::before {
+  --direction: left;
 }
 
 /* Social Buttons */
 .social-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .social-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 0.6rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
   flex: 1;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .social-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  color: white;
 }
 
 .social-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
-/* Ultra-Mobile & Short Screen Optimizations (iPhone 4/5) */
-@media screen and (max-width: 350px), screen and (max-height: 550px) {
+/* Mobile & Small Screen Optimizations */
+@media screen and (max-width: 480px) {
   :root {
-    --spacing-container: 0.75rem;
+    --spacing-container: 1rem;
+  }
+
+  .content-wrapper {
+    padding: 1.5rem 1rem;
   }
 
   .login-card {
-    padding: 1.25rem 1rem;
-    gap: 0.75rem;
-    border-radius: 16px;
+    padding: 1.5rem 1.25rem;
+    gap: 1rem;
+    border-radius: 24px;
+    max-width: 320px;
   }
 
-  .login-header {
-    gap: 0.4rem;
+  .brand-name {
+    font-size: 2.25rem;
   }
 
-  .login-logo-container {
-    padding: 6px;
-    border-radius: 8px;
-    margin-bottom: 0.25rem;
+  .brand-icon {
+    width: 36px;
+    height: 36px;
   }
 
-  .login-logo-container img {
-    width: 32px !important;
+  .login-title {
+    font-size: 1.25rem;
   }
 
   .login-subtitle {
-    font-size: 0.85rem;
-    line-height: 1.3;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
   }
 
   .login-form {
-    gap: 0.6rem;
+    gap: 0.85rem;
   }
 
   .login-input {
-    padding: 0.6rem 0.8rem 0.6rem 2.5rem;
-    font-size: 0.9rem;
-  }
-
-  .input-icon {
-    left: 0.75rem;
-    width: 18px;
-    height: 18px;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    font-size: 0.95rem;
+    border-radius: 12px;
   }
 
   .submit-button {
-    padding: 0.8rem;
-    font-size: 0.95rem;
+    padding: 0.9rem;
+    font-size: 1rem;
+    border-radius: 12px;
   }
 
-  .divider {
-    margin: 0.25rem 0;
-    font-size: 0.75rem;
+  .social-buttons {
+    gap: 0.75rem;
   }
 
   .social-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.65rem;
+    border-radius: 12px;
   }
 
   .social-icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Ultra-short screens */
+@media screen and (max-height: 550px) {
+  .login-card {
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .login-header {
+    gap: 0.5rem;
+  }
+
+  .login-subtitle {
+    display: none; /* Hide subtitle on very short screens to save space */
+  }
+}
+
+/* Specific scrolling fix for very short screens (like iPhone 4 landscape or short portrait) */
+@media screen and (max-height: 500px) {
+  .content-wrapper {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    display: block; /* Switch from flex to block to allow natural scrolling */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 
 /* Handle landscape on very short screens */
 @media screen and (orientation: landscape) and (max-height: 500px) {
-  .content-wrapper {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    justify-content: flex-start;
-  }
-  
   .login-card {
-    margin: auto;
+    margin: 2rem auto;
   }
 }

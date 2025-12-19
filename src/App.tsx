@@ -1,6 +1,6 @@
-import { Mail, Lock, Eye, EyeOff, Chrome, Apple } from 'lucide-react';
-import { useState } from 'react';
-import logo from './assets/logo.svg';
+import { Mail, Lock, Eye, EyeOff, Chrome, Apple } from "lucide-react";
+import { useState } from "react";
+import logo from "./assets/logo.svg";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,43 +11,51 @@ function App() {
       <div className="content-wrapper">
         <div className="login-card">
           <header className="login-header">
-            <div className="login-logo-container">
-              <img src={logo} alt="Digital Somiti Logo" style={{ width: '40px' }} />
+            <div className="brand-identity">
+              <img
+                src={logo}
+                alt="Digital Somiti Logo"
+                className="brand-icon"
+              />
+              <h1 className="brand-name">Digital Somiti</h1>
             </div>
-            <h1 className="login-title">Sign in with email</h1>
+            <h2 className="login-title">Sign in to continue</h2>
             <p className="login-subtitle">
-              Your Digital Micro-Savings Partner. Secure, fast, and reliable.
+              Securely access your Digital Somiti dashboard and manage your
+              micro-savings.
             </p>
           </header>
 
           <form className="login-form" onSubmit={(e) => e.preventDefault()}>
             <div className="input-group">
               <Mail className="input-icon" size={20} />
-              <input 
-                type="email" 
-                placeholder="Email" 
-                className="login-input" 
-                required 
+              <input
+                type="email"
+                placeholder="Email address"
+                className="login-input"
+                required
               />
             </div>
 
             <div className="input-group">
               <Lock className="input-icon" size={20} />
-              <input 
-                type={showPassword ? "text" : "password"} 
-                placeholder="Password" 
-                className="login-input" 
-                required 
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="login-input"
+                required
               />
-              <div 
-                className="password-toggle" 
+              <div
+                className="password-toggle"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </div>
             </div>
 
-            <a href="#" className="forgot-password">Forgot password?</a>
+            <a href="#" className="forgot-password">
+              Forgot password?
+            </a>
 
             <button type="submit" className="submit-button">
               Get Started
@@ -61,15 +69,15 @@ function App() {
               <Chrome className="social-icon" />
             </button>
             <button className="social-btn" title="Facebook">
-              <svg 
-                viewBox="0 0 24 24" 
-                width="20" 
-                height="20" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="social-icon"
               >
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
