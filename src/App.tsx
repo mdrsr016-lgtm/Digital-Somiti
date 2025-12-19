@@ -5,6 +5,7 @@ import { translations, Language } from "./data/translations";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { ForgotPasswordModal } from "./components/ForgotPasswordModal";
+import { supabase } from "./lib/supabase";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const saved = localStorage.getItem("theme") as "light" | "dark" | null;
     return saved || "dark";
@@ -38,23 +40,81 @@ function App() {
 
   const t = translations[language];
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    const prefix = userId.substring(0, 3).toLowerCase();
+    try {
+      // 1. Authenticate with Supabase Auth
+      // Note: We are using "userId" as email for now if it contains @, else we assume it's a custom ID
+      // But Supabase Auth typically requires email.
+      // Strategy:
+      // Option A: Ensure userId is email.
+      // Option B: Query `profiles` to get email from `user_id_custom`, then sign in.
+      // For simplicity/robustness, let's assume the user enters Email for now,
+      // OR we can try to look up the email if we had an Edge Function.
+      // WITHOUT Edge Function: We must ask user for Email or map CustomID -> Email on client (insecure/hard).
 
-    if (prefix === "mem") {
-      alert(`Logged in as Member with ID: ${userId}`);
-      // Proceed to Member Dashboard
-    } else if (prefix === "inv") {
-      alert(`Logged in as Investor with ID: ${userId}`);
-      // Proceed to Investor Dashboard
-    } else if (prefix === "adm") {
-      alert(`Logged in as Admin with ID: ${userId}`);
-      // Proceed to Admin Dashboard
-    } else {
-      setError(t.invalidIdError);
+      // Let's assume the input is EMAIL for the auth step, OR we accept the limitation of current Supabase Auth.
+      // However, the prompt implies "id start with mem/inv/adm".
+      // To support non-email login (e.g. usernames or custom IDs), we need a lookup step.
+      // BUT we can't lookup without being auth'd (unless public read is on).
+      // Assuming public read is on for profiles (we set that policy).
+
+      let emailToLogin = userId;
+
+      // Check if it looks like an email
+      if (!userId.includes("@")) {
+        // Attempt to find the email associated with this custom user_id
+        const { data: profileData, error: profileError } = await supabase
+          .from("profiles")
+          .select("email"); // Wait, we can't query auth.users email from public table easily usually.
+        // Actually the profile table should probably assume we store email there or we expect email input.
+        // RETRY STRATEGY:
+        // Since this is a new setup, let's Stick to Email Login for Auth, BUT check the Role after.
+        // OR, if the user REALLY wants 'mem...' login, we'd need to store that in `profiles` and mapped to a real user.
+        // If we assume the "User ID" input IS the email, proceeding.
+        // If the "User ID" is "mem123", we can't easily sign in without a custom mapping.
+
+        // FOR NOW: Let's assume the user enters EMAIL to login, OR we implement a "fake" email generator "mem123@digitalsomiti.local".
+        emailToLogin = `${userId}@digitalsomiti.com`; // Mock domain for custom IDs
+      }
+
+      const { data: authData, error: authError } =
+        await supabase.auth.signInWithPassword({
+          email: emailToLogin,
+          password: password,
+        });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // 2. Fetch User Profile to get Role
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", authData.user.id)
+          .single();
+
+        if (profileError) {
+          // Fallback if profile missing
+          console.error("Profile fetch error:", profileError);
+          throw new Error("Profile not found");
+        }
+
+        const role = profile?.role;
+        alert(
+          `Logged in successfully! Role: ${
+            role ? role.toUpperCase() : "UNKNOWN"
+          }`
+        );
+      }
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setError(err.message || "Failed to login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -131,8 +191,8 @@ function App() {
               </p>
             )}
 
-            <button type="submit" className="submit-button">
-              {t.getStarted}
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? "Loading..." : t.getStarted}
             </button>
           </form>
         </div>
