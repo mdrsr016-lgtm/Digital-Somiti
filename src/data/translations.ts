@@ -1,0 +1,30 @@
+export const translations = {
+  en: {
+    brandName: "Digital Somiti",
+    loginTitle: "Sign in to continue",
+    loginSubtitle: "Securely access your Digital Somiti dashboard",
+    memberIdPlaceholder: "Member ID",
+    passwordPlaceholder: "Password",
+    forgotPassword: "Forgot password?",
+    getStarted: "Log in",
+    modalTitle: "Reset Password",
+    modalMessage: "Please contact the admin to reset your password.",
+    modalButton: "Got it",
+  },
+  bn: {
+    brandName: "ডিজিটাল সমিতি",
+    loginTitle: "চালিয়ে যেতে সাইন ইন করুন",
+    loginSubtitle: "নিরাপদে আপনার ডিজিটাল সমিতি ড্যাশবোর্ডে প্রবেশ করুন",
+    memberIdPlaceholder: "সদস্য আইডি",
+    passwordPlaceholder: "পাসওয়ার্ড",
+    forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
+    getStarted: "লগ ইন করুন",
+    modalTitle: "পাসওয়ার্ড রিসেট করুন",
+    modalMessage:
+      "আপনার পাসওয়ার্ড রিসেট করতে অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন।",
+    modalButton: "ঠিক আছে",
+  },
+};
+
+export type Language = "en" | "bn";
+export type TranslationKey = keyof typeof translations.en;

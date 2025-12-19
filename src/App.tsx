@@ -1,32 +1,23 @@
-import { User, Lock, Eye, EyeOff, Sun, Moon, Globe } from "lucide-react";
+import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "./assets/logo.svg";
+import { translations, Language } from "./data/translations";
+import { ThemeToggle } from "./components/ThemeToggle";
+import { LanguageSelector } from "./components/LanguageSelector";
+import { ForgotPasswordModal } from "./components/ForgotPasswordModal";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [language, setLanguage] = useState<"en" | "bn">("en");
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
+    return saved || "dark";
+  });
 
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
-
-  // Load language from localStorage on mount
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("language") as
-      | "en"
-      | "bn"
-      | null;
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
-  }, []);
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem("language") as Language | null;
+    return saved || "en";
+  });
 
   // Save theme to localStorage when it changes
   useEffect(() => {
@@ -42,82 +33,12 @@ function App() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  const selectLanguage = (lang: "en" | "bn") => {
-    setLanguage(lang);
-    setShowLanguageMenu(false);
-  };
-
-  // Translations
-  const translations = {
-    en: {
-      brandName: "Digital Somiti",
-      loginTitle: "Sign in to continue",
-      loginSubtitle: "Securely access your Digital Somiti dashboard",
-      memberIdPlaceholder: "Member ID",
-      passwordPlaceholder: "Password",
-      forgotPassword: "Forgot password?",
-      getStarted: "Log in",
-      modalTitle: "Reset Password",
-      modalMessage: "Please contact the admin to reset your password.",
-      modalButton: "Got it",
-    },
-    bn: {
-      brandName: "ডিজিটাল সমিতি",
-      loginTitle: "চালিয়ে যেতে সাইন ইন করুন",
-      loginSubtitle: "নিরাপদে আপনার ডিজিটাল সমিতি ড্যাশবোর্ডে প্রবেশ করুন",
-      memberIdPlaceholder: "সদস্য আইডি",
-      passwordPlaceholder: "পাসওয়ার্ড",
-      forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
-      getStarted: "লগ ইন করুন",
-      modalTitle: "পাসওয়ার্ড রিসেট করুন",
-      modalMessage:
-        "আপনার পাসওয়ার্ড রিসেট করতে অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন।",
-      modalButton: "ঠিক আছে",
-    },
-  };
-
   const t = translations[language];
 
   return (
     <div className={`landing-page ${theme}-mode lang-${language}`}>
-      {/* Theme Toggle Button */}
-      <button
-        className="theme-toggle"
-        onClick={toggleTheme}
-        aria-label="Toggle theme"
-      >
-        {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-      </button>
-
-      {/* Language Toggle Button */}
-      <div className="language-selector">
-        <button
-          className="language-toggle"
-          onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-          aria-label="Select language"
-        >
-          <Globe size={20} />
-        </button>
-
-        {showLanguageMenu && (
-          <div className="language-menu">
-            <button
-              className={`language-option ${language === "en" ? "active" : ""}`}
-              onClick={() => selectLanguage("en")}
-            >
-              <span className="flag">🇬🇧</span>
-              <span className="language-name">English</span>
-            </button>
-            <button
-              className={`language-option ${language === "bn" ? "active" : ""}`}
-              onClick={() => selectLanguage("bn")}
-            >
-              <span className="flag">🇧🇩</span>
-              <span className="language-name">বাংলা</span>
-            </button>
-          </div>
-        )}
-      </div>
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <LanguageSelector language={language} setLanguage={setLanguage} />
 
       <div className="content-wrapper">
         <div className="login-card">
@@ -179,20 +100,11 @@ function App() {
         </div>
       </div>
 
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3 className="modal-title">{t.modalTitle}</h3>
-            <p className="modal-message">{t.modalMessage}</p>
-            <button
-              className="modal-button"
-              onClick={() => setShowModal(false)}
-            >
-              {t.modalButton}
-            </button>
-          </div>
-        </div>
-      )}
+      <ForgotPasswordModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        language={language}
+      />
     </div>
   );
 }
