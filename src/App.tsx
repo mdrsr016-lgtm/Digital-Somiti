@@ -1,4 +1,4 @@
-import { Mail, Lock, Eye, EyeOff, Chrome, Apple } from "lucide-react";
+import { User, Lock, Eye, EyeOff, Chrome, Apple } from "lucide-react";
 import { useState } from "react";
 import logo from "./assets/logo.svg";
 
@@ -28,10 +28,10 @@ function App() {
 
           <form className="login-form" onSubmit={(e) => e.preventDefault()}>
             <div className="input-group">
-              <Mail className="input-icon" size={20} />
+              <User className="input-icon" size={20} />
               <input
-                type="email"
-                placeholder="Email address"
+                type="text"
+                placeholder="Member ID"
                 className="login-input"
                 required
               />
