@@ -9,6 +9,9 @@ import { ForgotPasswordModal } from "./components/ForgotPasswordModal";
 function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const saved = localStorage.getItem("theme") as "light" | "dark" | null;
     return saved || "dark";
@@ -35,6 +38,26 @@ function App() {
 
   const t = translations[language];
 
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const prefix = userId.substring(0, 3).toLowerCase();
+
+    if (prefix === "mem") {
+      alert(`Logged in as Member with ID: ${userId}`);
+      // Proceed to Member Dashboard
+    } else if (prefix === "inv") {
+      alert(`Logged in as Investor with ID: ${userId}`);
+      // Proceed to Investor Dashboard
+    } else if (prefix === "adm") {
+      alert(`Logged in as Admin with ID: ${userId}`);
+      // Proceed to Admin Dashboard
+    } else {
+      setError(t.invalidIdError);
+    }
+  };
+
   return (
     <div className={`landing-page ${theme}-mode lang-${language}`}>
       <div className="header-controls">
@@ -57,14 +80,16 @@ function App() {
             <p className="login-subtitle">{t.loginSubtitle}</p>
           </header>
 
-          <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <User className="input-icon" size={20} />
               <input
                 type="text"
-                placeholder={t.memberIdPlaceholder}
+                placeholder={t.userIdPlaceholder}
                 className="login-input"
                 required
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
               />
             </div>
 
@@ -75,6 +100,8 @@ function App() {
                 placeholder={t.passwordPlaceholder}
                 className="login-input"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div
                 className="password-toggle"
@@ -94,6 +121,15 @@ function App() {
             >
               {t.forgotPassword}
             </a>
+
+            {error && (
+              <p
+                className="error-message"
+                style={{ color: "red", marginTop: "10px", fontSize: "0.9rem" }}
+              >
+                {error}
+              </p>
+            )}
 
             <button type="submit" className="submit-button">
               {t.getStarted}
