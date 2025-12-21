@@ -929,14 +929,14 @@ body {
   }
 }
 
-
 /* ==============================================
 
 /* ==============================================
    GLASSMORPHISM UTILITY CLASSES
    ============================================== */
 
-/* Glass Card Variants */.glass-card {
+/* Glass Card Variants */
+.glass-card {
   background: var(--glass-bg-base);
   backdrop-filter: blur(var(--glass-blur-light));
   -webkit-backdrop-filter: blur(var(--glass-blur-light));
@@ -949,11 +949,17 @@ body {
 .glass-card:hover {
   transform: translateY(-2px);
   border-color: var(--glass-border-medium);
-  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 40px rgba(59, 130, 246, 0.15);
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(59, 130, 246, 0.15);
 }
 
-/* Stat Cards with Finance Theme */.stat-card-blue {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+/* Stat Cards with Finance Theme */
+.stat-card-blue {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
   backdrop-filter: blur(var(--glass-blur-medium));
   -webkit-backdrop-filter: blur(var(--glass-blur-medium));
   border: 1px solid rgba(59, 130, 246, 0.3);
@@ -965,7 +971,7 @@ body {
 }
 
 .stat-card-blue::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -982,7 +988,11 @@ body {
 }
 
 .stat-card-green {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   backdrop-filter: blur(var(--glass-blur-medium));
   -webkit-backdrop-filter: blur(var(--glass-blur-medium));
   border: 1px solid rgba(16, 185, 129, 0.3);
@@ -994,7 +1004,7 @@ body {
 }
 
 .stat-card-green::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -1011,7 +1021,11 @@ body {
 }
 
 .stat-card-purple {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.1) 0%,
+    rgba(168, 85, 247, 0.05) 100%
+  );
   backdrop-filter: blur(var(--glass-blur-medium));
   -webkit-backdrop-filter: blur(var(--glass-blur-medium));
   border: 1px solid rgba(168, 85, 247, 0.3);
@@ -1023,7 +1037,7 @@ body {
 }
 
 .stat-card-purple::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -1037,4 +1051,150 @@ body {
   transform: translateY(-4px);
   border-color: rgba(168, 85, 247, 0.5);
   box-shadow: var(--shadow-glow-purple);
+}
+
+/* Glass Card Elevated */
+.glass-card-elevated {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  border: 1px solid var(--glass-border-medium);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 40px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-elevated:hover {
+  transform: translateY(-2px);
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--shadow-xl), inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 60px rgba(59, 130, 246, 0.15);
+}
+
+/* Icon Glow Effects */
+.icon-glow-blue {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.icon-glow-green {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.icon-glow-purple {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+/* Badge Components */
+.badge-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  color: rgb(16, 185, 129);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 12px;
+  color: rgb(245, 158, 11);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  color: rgb(59, 130, 246);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Light Mode Adjustments for New Components */
+.light-mode .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.light-mode .glass-card:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+.light-mode .glass-card-elevated {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.light-mode .glass-card-elevated:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8), 0 0 60px rgba(59, 130, 246, 0.15);
+}
+
+.light-mode .stat-card-blue,
+.light-mode .stat-card-green,
+.light-mode .stat-card-purple {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive Adjustments for Dashboard */
+@media screen and (max-width: 768px) {
+  .stat-card-blue,
+  .stat-card-green,
+  .stat-card-purple,
+  .glass-card-elevated {
+    padding: 1.25rem;
+  }
+
+  .icon-glow-blue,
+  .icon-glow-green,
+  .icon-glow-purple {
+    width: 40px;
+    height: 40px;
+  }
 }

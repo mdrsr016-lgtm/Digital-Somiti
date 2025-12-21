@@ -5,7 +5,6 @@ import { translations, Language } from "../data/translations";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { ForgotPasswordModal } from "../components/ForgotPasswordModal";
-import { supabase } from "../lib/supabase";
 import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
@@ -14,8 +13,6 @@ export const LoginPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const saved = localStorage.getItem("theme") as "light" | "dark" | null;
     return saved || "dark";
@@ -44,56 +41,17 @@ export const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
 
-    try {
-      let emailToLogin = userId;
-
-      // Check if it looks like an email
-      if (!userId.includes("@")) {
-        emailToLogin = `${userId}@dsbd.com`; // Mock domain
-      }
-
-      const { data: authData, error: authError } =
-        await supabase.auth.signInWithPassword({
-          email: emailToLogin,
-          password: password,
-        });
-
-      if (authError) throw authError;
-
-      if (authData.user) {
-        // Fetch User Profile to get Role
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", authData.user.id)
-          .single();
-
-        if (profileError) {
-          console.error("Profile fetch error:", profileError);
-          throw new Error("Profile not found");
-        }
-
-        const role = profile?.role;
-
-        // Redirect based on role
-        if (role === "member") {
-          navigate("/member");
-        } else if (role === "investor") {
-          navigate("/investor");
-        } else if (role === "admin") {
-          navigate("/admin");
-        } else {
-          setError("Unknown role: " + role);
-        }
-      }
-    } catch (err: any) {
-      console.error("Login error:", err);
-      setError(err.message || "Failed to login");
-    } finally {
-      setLoading(false);
+    // Check credentials and route accordingly
+    if (userId === "mem" && password === "mem") {
+      navigate("/member/profile");
+    } else if (userId === "inv" && password === "inv") {
+      navigate("/investor/profile");
+    } else if (userId === "adm" && password === "adm") {
+      navigate("/admin");
+    } else {
+      // Simple error handling for invalid credentials
+      alert(t.loginError || "Invalid credentials. Please try again.");
     }
   };
 
@@ -161,17 +119,8 @@ export const LoginPage = () => {
               {t.forgotPassword}
             </a>
 
-            {error && (
-              <p
-                className="error-message"
-                style={{ color: "red", marginTop: "10px", fontSize: "0.9rem" }}
-              >
-                {error}
-              </p>
-            )}
-
-            <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? "Loading..." : t.getStarted}
+            <button type="submit" className="submit-button">
+              {t.getStarted}
             </button>
           </form>
         </div>

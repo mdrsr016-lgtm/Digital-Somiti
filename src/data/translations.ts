@@ -12,6 +12,7 @@ export const translations = {
     modalButton: "Got it",
     invalidIdError:
       "Invalid ID format. Must start with 'mem', 'inv', or 'adm'.",
+    loginError: "Invalid credentials. Please try again.",
     profile: "Profile",
     dashboard: "Dashboard",
     logout: "Log out",
@@ -43,6 +44,7 @@ export const translations = {
     modalButton: "ঠিক আছে",
     invalidIdError:
       "অবৈধ আইডি ফরম্যাট। অবশ্যই 'mem', 'inv', বা 'adm' দিয়ে শুরু হতে হবে।",
+    loginError: "ভুল ইউজার আইডি বা পাসওয়ার্ড। আবার চেষ্টা করুন।",
     profile: "প্রোফাইল",
     dashboard: "ড্যাশবোর্ড",
     logout: "লগ আউট",
