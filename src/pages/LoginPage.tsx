@@ -5,10 +5,10 @@ import { translations, Language } from "../data/translations";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { ForgotPasswordModal } from "../components/ForgotPasswordModal";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState("");
@@ -42,13 +42,13 @@ export const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check credentials and route accordingly
-    if (userId === "mem" && password === "mem") {
-      navigate("/member/profile");
-    } else if (userId === "inv" && password === "inv") {
-      navigate("/investor/profile");
-    } else if (userId === "adm" && password === "adm") {
-      navigate("/admin");
+    // Credentials check (no longer redirects)
+    if (
+      (userId === "mem" && password === "mem") ||
+      (userId === "inv" && password === "inv") ||
+      (userId === "adm" && password === "adm")
+    ) {
+      alert("Success! (Navigation removed as requested)");
     } else {
       // Simple error handling for invalid credentials
       alert(t.loginError || "Invalid credentials. Please try again.");
