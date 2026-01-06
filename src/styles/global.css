@@ -972,19 +972,23 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Active State Styles - Soft Glass Highlight */
+/* Active State Styles - Glassmorphism */
 .active-pill-bg {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.95); /* Slightly translucent */
+  /* Glassmorphism for the active pill */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 100px;
   z-index: -1;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4px);
 }
 
 .light-mode .active-pill-bg {
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .nav-content {
@@ -1006,14 +1010,14 @@ body {
   color: rgba(0, 0, 0, 0.6);
 }
 
-/* Active Icon Color */
+/* Active Icon Color - High Contrast */
 .nav-item.active .nav-icon {
-  color: #0f172a;
-  filter: none;
+  color: white;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
 .light-mode .nav-item.active .nav-icon {
-  color: white;
+  color: #0f172a;
 }
 
 /* Hover State for Inactive Items */
@@ -1021,7 +1025,6 @@ body {
   color: white;
   transform: scale(1.1);
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Glow effect on hover */
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
@@ -1034,11 +1037,11 @@ body {
   font-size: 0.95rem;
   white-space: nowrap;
   overflow: hidden;
-  color: #0f172a;
+  color: white;
 }
 
 .light-mode .nav-text {
-  color: white;
+  color: #0f172a;
 }
 
 /* Mobile adjustments */
