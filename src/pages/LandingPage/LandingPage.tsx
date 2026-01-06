@@ -1,13 +1,13 @@
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { useState, useEffect } from "react";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/images/logo.svg";
 import { translations, Language } from "../data/translations";
-import { ThemeToggle } from "../components/ThemeToggle";
-import { LanguageSelector } from "../components/LanguageSelector";
-import { ForgotPasswordModal } from "../components/ForgotPasswordModal";
+import { ThemeToggle } from "../../components/common/ThemeToggle";
+import { LanguageSelector } from "../../components/common/LanguageSelector";
+import { ForgotPasswordModal } from "../../components/common/ForgotPasswordModal";
 // import { useNavigate } from "react-router-dom";
 
-export const LoginPage = () => {
+export const LandingPage = () => {
   // const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
