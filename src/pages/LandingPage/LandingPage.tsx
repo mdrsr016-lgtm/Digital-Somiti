@@ -1,7 +1,7 @@
 import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../../assets/images/logo.svg";
-import { translations, Language } from "../data/translations";
+import { translations, Language } from "../../data/translations";
 import { ThemeToggle } from "../../components/common/ThemeToggle";
 import { LanguageSelector } from "../../components/common/LanguageSelector";
 import { ForgotPasswordModal } from "../../components/common/ForgotPasswordModal";
