@@ -5,19 +5,39 @@ import {
   User,
   Settings,
 } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 type NavItem = "status" | "transactions" | "loan" | "profile" | "settings";
 
 export const BottomNav = () => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState<NavItem>("status");
+  const location = useLocation();
+
+  const getActiveItem = (path: string): NavItem => {
+    if (path.includes("/transactions")) return "transactions";
+    if (path.includes("/loan")) return "loan";
+    if (path.includes("/profile")) return "profile";
+    if (path.includes("/settings")) return "settings";
+    return "status";
+  };
+
+  const [activeItem, setActiveItem] = useState<NavItem>(() =>
+    getActiveItem(location.pathname)
+  );
+
+  useEffect(() => {
+    setActiveItem(getActiveItem(location.pathname));
+  }, [location.pathname]);
 
   const handleNavClick = (item: NavItem) => {
-    setActiveItem(item);
+    setActiveItem(item); // Optimistic update for instant animation
     if (item === "status") navigate("/member");
+    if (item === "transactions") navigate("/member/transactions");
+    if (item === "loan") navigate("/member/loan");
+    if (item === "profile") navigate("/member/profile");
+    if (item === "settings") navigate("/member/settings");
   };
 
   const navItems = [
