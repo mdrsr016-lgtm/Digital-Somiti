@@ -1,8 +1,4 @@
-import {
-  TranslationKey,
-  translations,
-  Language,
-} from "../../data/translations";
+import { translations, Language } from "../../data/translations";
 
 interface ForgotPasswordModalProps {
   show: boolean;

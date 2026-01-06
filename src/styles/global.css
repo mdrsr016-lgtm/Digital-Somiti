@@ -928,3 +928,134 @@ body {
     padding: 0.4rem 0.6rem;
   }
 }
+/* Bottom Navigation */
+.bottom-nav-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-pill {
+  /* Premium Glassmorphism */
+  background: rgba(15, 23, 42, 0.6); /* More transparent */
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 100px;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.light-mode .nav-pill {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Active State Styles - Soft Glass Highlight */
+.active-pill-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.95); /* Slightly translucent */
+  border-radius: 100px;
+  z-index: -1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.light-mode .active-pill-bg {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.light-mode .nav-icon {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Active Icon Color */
+.nav-item.active .nav-icon {
+  color: #0f172a;
+  filter: none;
+}
+
+.light-mode .nav-item.active .nav-icon {
+  color: white;
+}
+
+/* Hover State for Inactive Items */
+.nav-item:not(.active):hover .nav-icon {
+  color: white;
+  transform: scale(1.1);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Glow effect on hover */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.light-mode .nav-item:not(.active):hover .nav-icon {
+  color: #0f172a;
+}
+
+.nav-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #0f172a;
+}
+
+.light-mode .nav-text {
+  color: white;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 480px) {
+  .bottom-nav-container {
+    bottom: 1.5rem;
+    width: 92%;
+  }
+
+  .nav-pill {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.4rem;
+    gap: 0;
+  }
+
+  .nav-item {
+    padding: 0.65rem 0.85rem;
+  }
+}

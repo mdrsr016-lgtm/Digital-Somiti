@@ -5,10 +5,10 @@ import { translations, Language } from "../../data/translations";
 import { ThemeToggle } from "../../components/common/ThemeToggle";
 import { LanguageSelector } from "../../components/common/LanguageSelector";
 import { ForgotPasswordModal } from "../../components/common/ForgotPasswordModal";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState("");
@@ -42,13 +42,14 @@ export const LandingPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Credentials check (no longer redirects)
-    if (
-      (userId === "mem" && password === "mem") ||
+    // Credentials check
+    if (userId === "mem" && password === "mem") {
+      navigate("/member");
+    } else if (
       (userId === "inv" && password === "inv") ||
       (userId === "adm" && password === "adm")
     ) {
-      alert("Success! (Navigation removed as requested)");
+      alert("Success! (Navigation only implemented for Member page)");
     } else {
       // Simple error handling for invalid credentials
       alert(t.loginError || "Invalid credentials. Please try again.");
