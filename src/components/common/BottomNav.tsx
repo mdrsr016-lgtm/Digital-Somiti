@@ -65,7 +65,7 @@ export const BottomNav = () => {
                 <motion.div
                   layoutId="activePill"
                   className="active-pill-bg"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 35 }}
                 />
               )}
 
